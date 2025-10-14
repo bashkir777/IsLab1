@@ -37,11 +37,15 @@ public class PriceService {
     public void updatePrices() {
         for (Asset asset : Asset.values()) {
             try {
-                ResponseEntity<PriceResponseDTO> response = restTemplate.getForEntity(API_URL, PriceResponseDTO.class, asset.getSymbol());
-                if (response.getBody() != null && response.getBody().getPrice() != null) {
-                    cache.put(asset, response.getBody().getPrice());
-                    log.info("Updated price for {}: {}", asset, response.getBody().getPrice());
+                ResponseEntity<PriceResponseDTO> response =
+                        restTemplate.getForEntity(API_URL, PriceResponseDTO.class, asset.getSymbol());
+
+                PriceResponseDTO body = response.getBody();
+                if (body != null && body.getPrice() != null) {
+                    cache.put(asset, body.getPrice());
+                    log.info("Updated price for {}: {}", asset, body.getPrice());
                 }
+
             } catch (Exception e) {
                 log.error("Failed to fetch price for {}: {}", asset, e.getMessage());
             }
