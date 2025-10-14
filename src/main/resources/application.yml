@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${pg_host}:${pg_port}/${pd_database}
+    username: ${pg_username}
+    password: ${pg_password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+jwt:
+  secret: 4D6251655468576D5A7134743777217A25432A462D4A614E645267556B587032
