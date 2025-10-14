@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: spotbugs-report
-          path: target/spotbugs/
+          path: target/spotbugs.html
           if-no-files-found: warn
 
       - name: Run Dependency-Check
