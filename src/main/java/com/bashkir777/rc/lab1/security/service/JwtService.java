@@ -6,6 +6,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class JwtService {
 
     public String generateToken(String username) {
         return Jwts.builder()
-                .subject(username)
+                .subject(HtmlUtils.htmlEscape(username))
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
                 .signWith(getSignInKey())
